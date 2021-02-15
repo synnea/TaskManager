@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PomoTaskList = (props) => {
-    <h1>PomoTaskList</h1>
+    return <h3>PomoTaskList</h3>
 };
 
 export default PomoTaskList;
