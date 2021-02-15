@@ -7,8 +7,27 @@ Enzyme.configure({ adapter: new EnzymeAdapter()});
 
 const setup = () => shallow(<App />);
 
-test('the main app component renders', () => {
-  const wrapper = setup();
-  const component = findByTestAttr(wrapper, 'components-app');
-  expect(component.length).toBe(1);
-})
+describe('app successfully renders:', () => {
+  let wrapper;
+  beforeEach(( )=> {
+     wrapper = setup();
+  });
+  test('the main component', () => {
+    const wrapper = setup();
+    const component = findByTestAttr(wrapper, 'components-app');
+    expect(component.length).toBe(1);
+  });
+  test('PomoTaskList', () => {
+    const wrapper = setup();
+    const component = findByTestAttr(wrapper, 'component-pomotasklist');
+    expect(component.length).toBe(1);
+  });
+  test('PomoTaskList', () => {
+    const wrapper = setup();
+    const component = findByTestAttr(wrapper, 'component-regulartasklist');
+    expect(component.length).toBe(1);
+  });
+});
+
+
+
