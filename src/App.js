@@ -1,9 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div data-test="components-app" className="App">
       <h1>Today's Tasks</h1>
     </div>
   );
