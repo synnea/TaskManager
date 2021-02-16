@@ -13,27 +13,34 @@ class App extends Component {
     };
   }
 
-  onAddTask = () => {
-
-    // const newTask = document.getElementById('newRegularTask').value;
-    
-    // const updatedControls = state.regularTasks.concat(newTask);
-
-    // console.log(updatedControls);
+  componentDidUpdate() {
+    console.log(this.state);
 
   }
+
+  onAddTask = () => {
+    this.setState(state => {
+      const regularTasks = state.regularTasks.concat(state.value);
+ 
+      return {
+        regularTasks,
+        value: '',
+      };
+    });
+  };
+
 
   onChangeInput = (event) => {
     this.setState({value: event.target.value});
     console.log(this.state);
-  }
+  };
 
   render () {
     return (
       <div data-test="components-app" className="App">
         <h1>Today's Tasks</h1>
         <PomoTaskList data-test="component-pomotasklist" />
-        <RegularTaskList add={this.onAddTask} change={this.onChangeInput} data-test="component-regulartasklist"  />
+        <RegularTaskList add={this.onAddTask} value={this.state.value} change={this.onChangeInput} data-test="component-regulartasklist"  />
       </div>
     );
   }
