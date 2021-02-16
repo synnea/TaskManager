@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 const RegularTaskInput = (props) => {
     return (
     <div>
-        <input type="text" id="newRegularTask" onChange={props.change} />
+        <input type="text" id="newRegularTask" onChange={props.change}  value={props.value} />
         <Button onClick={props.add} variant="contained" color="primary">
         Add Task
         </Button>
