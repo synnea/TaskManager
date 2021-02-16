@@ -5,6 +5,11 @@ const initialState = {
     regularTasks: []
 }
 
+function nextTaskId(tasks) {
+    const maxId = task.reduce((maxId, task) => Math.max(task.id, maxId), -1)
+    return maxId + 1
+  }
+
 
 const reducer = ( state = initialState, action ) => {
     switch (action.type) {
@@ -15,7 +20,12 @@ const reducer = ( state = initialState, action ) => {
                 ...state,
                 regularTasks: [
                     ...state.regularTasks,
-                    action.payload
+                    {
+                        // auto-incrementing numeric ID for this example
+                        id: nextTaskId(state.regularTasks),
+                        description: action.payload,
+                        completed: false
+                      }
                 ]
             }
 
