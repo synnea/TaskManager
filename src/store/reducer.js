@@ -27,7 +27,6 @@ const reducer = ( state = initialState, action ) => {
                 ]
             }
         case actionTypes.COMPLETE_REGULAR_TASK:
-
             return {
                 ...state,
                 regularTasks: state.regularTasks.map(task => {

@@ -1,5 +1,5 @@
 
-import { addRegularTask } from './store/actions';
+import { addRegularTask, completeRegularTask } from './store/actions';
 import { storeFactory } from './test/testUtils';
 
 describe('regular tasks', () => {
@@ -53,8 +53,8 @@ describe('regular tasks', () => {
             };
             expect(newState).toEqual(expectedState);
         });
-        test('remove task from store', () => {
-            store.dispatch(completeRegularTask(newTask));
+        test('set task as complete', () => {
+            store.dispatch(completeRegularTask(0));
             const newState = store.getState();
             const expectedState = {
                 ...initialState,
@@ -65,6 +65,13 @@ describe('regular tasks', () => {
                     completed: true
                 }]
             };
+            expect(newState).toEqual(expectedState);
+        });
+        test('delete task', () => {
+            store.dispatch(addRegularTask(newTask))
+            store.dispatch(deleteRegularTask(newTask.id));
+            const newState = store.getState();
+            const expectedState = [];
             expect(newState).toEqual(expectedState);
         });
     });
