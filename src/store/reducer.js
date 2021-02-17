@@ -5,8 +5,8 @@ const initialState = {
     regularTasks: []
 }
 
-function nextTaskId(tasks) {
-    const maxId = task.reduce((maxId, task) => Math.max(task.id, maxId), -1)
+export function nextTaskId(tasks) {
+    const maxId = tasks.reduce((maxId, tasks) => Math.max(tasks.id, maxId), -1)
     return maxId + 1
   }
 
@@ -28,9 +28,6 @@ const reducer = ( state = initialState, action ) => {
                       }
                 ]
             }
-
-        case actionTypes.CHANGE_REGULAR_INPUT_VALUE:
-             return '';
         default: 
             return state;
     }

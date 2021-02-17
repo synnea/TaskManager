@@ -7,10 +7,3 @@ export const addRegularTask = ( task ) => {
         payload: task
     };
 };
-
-export const changeRegularInputValue = ( value ) => {
-    return {
-        type: actionTypes.CHANGE_REGULAR_INPUT_VALUE,
-        value: value
-    };
-};

@@ -51,8 +51,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddedRegularTask: (task) => dispatch(actions.addRegularTask(task)),
-    onChangedRegularValue: (value) => dispatch(actions.changeRegularInputValue(value))
+    onAddedRegularTask: (task) => dispatch(actions.addRegularTask(task))
   };
 };
 
