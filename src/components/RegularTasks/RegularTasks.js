@@ -5,7 +5,7 @@ import * as actions from '../../store/actions';
 
 import { connect } from 'react-redux';
 
-class RegularTaskList extends Component {
+class RegularTasks extends Component {
     constructor(props) {
         super(props);
      
@@ -15,7 +15,7 @@ class RegularTaskList extends Component {
       }
     
       componentDidUpdate() {
-        console.log(this.props.regularTask);
+        console.log(this.props.regularTasks);
     
       }
     
@@ -26,6 +26,8 @@ class RegularTaskList extends Component {
       };
     
       onCompleteHandler = (id) => {
+        console.log("inside onCompleteHandler");
+        console.log("id inside onCompleteHandler" + id);
         this.props.onCompletedRegularTask(id);
       }
     
@@ -42,6 +44,7 @@ class RegularTaskList extends Component {
             return  <RegularTask
              complete={this.onCompleteHandler}
              key={task.id}
+             completed={task.completed}
              description={task.description}
              id={task.id} />
             })}
@@ -55,10 +58,6 @@ class RegularTaskList extends Component {
                 {tasks}   
             </div>
         )
-    }
-
-    componentDidUpdate() {
-        console.log(this.tasks)
     }
 };
 
@@ -77,4 +76,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegularTaskList);
+export default connect(mapStateToProps, mapDispatchToProps)(RegularTasks);

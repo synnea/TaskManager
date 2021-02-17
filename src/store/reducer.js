@@ -27,15 +27,15 @@ const reducer = ( state = initialState, action ) => {
                 ]
             }
         case actionTypes.COMPLETE_REGULAR_TASK:
-            console.log("inside complete reducer");
-            const task = state.regularTasks.filter(task => task.id === action.payload);
 
             return {
                 ...state,
-                regularTasks: [
-                    ...state.regularTasks,
-                    task.completed = true
-                ]
+                regularTasks: state.regularTasks.map(task => {
+                    if (task.id === action.payload) {
+                        task.completed = true
+                    }
+                    return task;
+                })
             }
         default: 
             return state;
