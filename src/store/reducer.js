@@ -36,6 +36,12 @@ const reducer = ( state = initialState, action ) => {
                     return task;
                 })
             }
+            case actionTypes.DELETE_REGULAR_TASK:
+                const updatedArray = state.regularTasks.filter(task => task.id !== action.payload);
+                return {
+                    ...state,
+                    regularTasks: updatedArray
+                }
         default: 
             return state;
     }

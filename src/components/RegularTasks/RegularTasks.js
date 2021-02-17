@@ -35,6 +35,10 @@ class RegularTasks extends Component {
       onChangeInput = (event) => {
         this.setState({value: event.target.value});
       };
+
+      onDeleteHandler = (id) => {
+        this.props.onDeleteRegularTask(id);
+      }
     
 
     render () {        
@@ -43,8 +47,8 @@ class RegularTasks extends Component {
             {this.props.regularTasks.map(task => {
             return  <RegularTask
              complete={this.onCompleteHandler}
+             delete={this.onDeleteHandler}
              key={task.id}
-             completed={task.completed}
              description={task.description}
              id={task.id} />
             })}
@@ -72,7 +76,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAddedRegularTask: (task) => dispatch(actions.addRegularTask(task)),
-    onCompletedRegularTask: (id) => dispatch(actions.completeRegularTask(id))
+    onCompletedRegularTask: (id) => dispatch(actions.completeRegularTask(id)),
+    onDeleteRegularTask: (id) => dispatch(actions.deleteRegularTask(id)),
   };
 };
 

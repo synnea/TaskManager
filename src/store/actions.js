@@ -14,3 +14,10 @@ export const completeRegularTask = ( id ) => {
         payload: id
     };
 };
+
+export const deleteRegularTask = ( id ) => {
+    return {
+        type: actionTypes.DELETE_REGULAR_TASK,
+        payload: id
+    };
+};
