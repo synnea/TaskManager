@@ -7,3 +7,10 @@ export const addRegularTask = ( task ) => {
         payload: task
     };
 };
+
+export const completeRegularTask = ( id ) => {
+    return {
+        type: actionTypes.COMPLETE_REGULAR_TASK,
+        payload: id
+    };
+};
