@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Input from './TaskInput';
 import RegularTask from './Task';
+import DataTracker from '../DataTracker';
 import * as actions from '../../store/actions';
 
 import { connect } from 'react-redux';
@@ -10,7 +11,7 @@ class RegularTasks extends Component {
         super(props);
      
         this.state = {
-          value: '',
+          value: ''
         };
       }
     
@@ -22,7 +23,6 @@ class RegularTasks extends Component {
           for (let task in completedTasks) {
             this.onDeleteHandler(completedTasks[task].id);
           };
-          console.log("just before dispatching onClearedTasks");
           this.onClearedHandler();
         }
       }
@@ -33,8 +33,14 @@ class RegularTasks extends Component {
         this.props.onAddedRegularTask(task);
       };
     
+      // onCompleteHandler = (id) => {
+      //   this.setState({completed: this.state.completed + 1})
+      //   this.props.onCompletedRegularTask(id);
+      // }
+
       onCompleteHandler = (id) => {
-        this.props.onCompletedRegularTask(id);
+        console.log("in new onCompleteHandler");
+        this.props.completeAndCountTask(id);
       }
 
       onClearedHandler = () => {
@@ -49,9 +55,8 @@ class RegularTasks extends Component {
       onDeleteHandler = (id) => {
         console.log("hello from ondelete");
         this.props.onDeleteRegularTask(id);
-      }
-    
-
+      };
+ 
     render () {        
         let tasks = (
             <div>
@@ -70,7 +75,8 @@ class RegularTasks extends Component {
         return (
             <div className="component-tasks">
                 <Input add={this.onAddHandler} change={this.onChangeInput} value={this.state.value} /> 
-                {tasks}   
+                {tasks}  
+                <DataTracker completed={this.state.completed} /> 
             </div>
         )
     }
@@ -90,6 +96,8 @@ const mapDispatchToProps = dispatch => {
     onCompletedRegularTask: (id) => dispatch(actions.completeRegularTask(id)),
     onDeleteRegularTask: (id) => dispatch(actions.deleteRegularTask(id)),
     onClearedTasks: () => dispatch(actions.clearTasks),
+    completeAndCountTask: (id) => dispatch(actions.completeAndCountTask(id))
+    
   };
 };
 

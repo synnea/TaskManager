@@ -6,3 +6,14 @@ font-size: 100;
   height: 100vh;
   width: 100%;
 }
+
+.task-panel {
+  border-radius: 5px;
+  text-align: center;
+  border: 0;
+  margin: 10vh 40vh;
+  padding: 3vh;
+  color: cornsilk;
+  padding-bottom: 5vh;
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+}

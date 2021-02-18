@@ -3,7 +3,8 @@ import * as actionTypes from './actionTypes';
 
 const initialState = {
     regularTasks: [],
-    clear: false
+    clear: false,
+    completed: 0
 }
 
 export function nextTaskId(tasks) {
@@ -35,7 +36,7 @@ const reducer = ( state = initialState, action ) => {
                         task.completed = true
                     }
                     return task;
-                })
+                }),
             }
         case actionTypes.DELETE_REGULAR_TASK:
             const updatedArray = state.regularTasks.filter(task => task.id !== action.payload);
@@ -44,11 +45,15 @@ const reducer = ( state = initialState, action ) => {
                 regularTasks: updatedArray
                 }
         case actionTypes.CLEAR_TASKS:
-            console.log("inside clear tasks");
             return { 
                 ...state,
                 clear: !state.clear
             }
+        case actionTypes.COUNT_COMPLETED_TASKS:
+                return { 
+                    ...state,
+                    completed: state.completed + 1
+                }
         default: 
             return state;
     }

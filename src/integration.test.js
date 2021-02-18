@@ -93,7 +93,8 @@ describe('task actions', () => {
                     store = storeFactory(initialState);
          });
          test('clear completed task', () => {
-            store.dispatch(clearCompletedTasks([0, 1]));
+            store.dispatch(clearTasks(0));
+            store.dispatch(clearTasks(1));
             const newState = store.getState();
             const expectedState = {regularTasks: []};
             expect(newState).toEqual(expectedState);
