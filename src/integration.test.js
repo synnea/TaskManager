@@ -1,8 +1,8 @@
 
 import { addRegularTask, deleteRegularTask, completeRegularTask } from './store/actions';
-import { storeFactory } from './test/testUtils';
+import { storeFactory, findByTestAttr, setup } from './test/testUtils';
 
-describe('regular tasks', () => {
+describe('task actions', () => {
     const newTask = 'clean the room';
     describe('manipulate empty store', () => {
         const initialState = {
@@ -74,4 +74,30 @@ describe('regular tasks', () => {
             expect(newState).toEqual(expectedState);
         });
     });
+    describe('manipulate multiple tasks', () => {
+        const initialState = {
+            regularTasks: [
+                {
+                    id: 0,
+                    description: 'buy groceries',
+                    completed: false
+                },
+                {
+                    id: 1,
+                    description: 'get dressed',
+                    completed: false
+                }]
+                }
+                let store;
+                beforeEach(() => {
+                    store = storeFactory(initialState);
+         });
+         test('clear completed task', () => {
+            store.dispatch(clearCompletedTasks([0, 1]));
+            const newState = store.getState();
+            const expectedState = {regularTasks: []};
+            expect(newState).toEqual(expectedState);
+         });
+    });
 });
+

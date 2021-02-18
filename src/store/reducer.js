@@ -2,7 +2,8 @@ import * as actionTypes from './actionTypes';
 
 
 const initialState = {
-    regularTasks: []
+    regularTasks: [],
+    clear: false
 }
 
 export function nextTaskId(tasks) {
@@ -36,12 +37,18 @@ const reducer = ( state = initialState, action ) => {
                     return task;
                 })
             }
-            case actionTypes.DELETE_REGULAR_TASK:
-                const updatedArray = state.regularTasks.filter(task => task.id !== action.payload);
-                return {
-                    ...state,
-                    regularTasks: updatedArray
+        case actionTypes.DELETE_REGULAR_TASK:
+            const updatedArray = state.regularTasks.filter(task => task.id !== action.payload);
+            return {
+                ...state,
+                regularTasks: updatedArray
                 }
+        case actionTypes.CLEAR_TASKS:
+            console.log("inside clear tasks");
+            return { 
+                ...state,
+                clear: !state.clear
+            }
         default: 
             return state;
     }

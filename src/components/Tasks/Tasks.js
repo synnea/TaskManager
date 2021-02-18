@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Input from './RegularTaskInput';
-import RegularTask from './RegularTask';
+import Input from './TaskInput';
+import RegularTask from './Task';
 import * as actions from '../../store/actions';
 
 import { connect } from 'react-redux';
@@ -15,8 +15,16 @@ class RegularTasks extends Component {
       }
     
       componentDidUpdate() {
-        console.log(this.props.regularTasks);
-    
+        if (this.props.clear) {
+          let completedTasks = this.props.regularTasks.filter(task => {
+            return task.completed === true
+          });
+          for (let task in completedTasks) {
+            this.onDeleteHandler(completedTasks[task].id);
+          };
+          console.log("just before dispatching onClearedTasks");
+          this.onClearedHandler();
+        }
       }
     
       onAddHandler = () => {
@@ -26,9 +34,11 @@ class RegularTasks extends Component {
       };
     
       onCompleteHandler = (id) => {
-        console.log("inside onCompleteHandler");
-        console.log("id inside onCompleteHandler" + id);
         this.props.onCompletedRegularTask(id);
+      }
+
+      onClearedHandler = () => {
+        this.props.onClearedTasks();
       }
     
     
@@ -37,6 +47,7 @@ class RegularTasks extends Component {
       };
 
       onDeleteHandler = (id) => {
+        console.log("hello from ondelete");
         this.props.onDeleteRegularTask(id);
       }
     
@@ -44,20 +55,20 @@ class RegularTasks extends Component {
     render () {        
         let tasks = (
             <div>
-            {this.props.regularTasks.map(task => {
-            return  <RegularTask
-             complete={this.onCompleteHandler}
-             delete={this.onDeleteHandler}
-             key={task.id}
-             description={task.description}
-             id={task.id} />
-            })}
+                {this.props.regularTasks.map(task => {
+                return  <RegularTask
+                complete={this.onCompleteHandler}
+                delete={this.onDeleteHandler}
+                completed={task.completed}
+                key={task.id}
+                description={task.description}
+                id={task.id} />
+                })}
             </div> 
         );
 
         return (
-            <div>
-                <h3>RegularTaskList</h3>
+            <div className="component-tasks">
                 <Input add={this.onAddHandler} change={this.onChangeInput} value={this.state.value} /> 
                 {tasks}   
             </div>
@@ -69,7 +80,7 @@ class RegularTasks extends Component {
 const mapStateToProps = state => {
     return {
         regularTasks: state.regularTasks,
-        regularTaskInputValue: state.regularTaskInputValue,
+        clear: state.clear
       }
 }
 
@@ -78,6 +89,7 @@ const mapDispatchToProps = dispatch => {
     onAddedRegularTask: (task) => dispatch(actions.addRegularTask(task)),
     onCompletedRegularTask: (id) => dispatch(actions.completeRegularTask(id)),
     onDeleteRegularTask: (id) => dispatch(actions.deleteRegularTask(id)),
+    onClearedTasks: () => dispatch(actions.clearTasks),
   };
 };
 

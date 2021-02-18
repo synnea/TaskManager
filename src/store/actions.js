@@ -21,3 +21,9 @@ export const deleteRegularTask = ( id ) => {
         payload: id
     };
 };
+
+export const clearTasks = ( ) => {
+    return {
+        type: actionTypes.CLEAR_TASKS,
+    };
+};
