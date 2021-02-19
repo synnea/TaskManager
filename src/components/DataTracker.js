@@ -1,13 +1,21 @@
 import React from 'react';
 import { useSelector} from 'react-redux';
+import {createSelector} from 'reselect';
 
-const DataTracker = (props) => {
-    const tasks = useSelector(state => state.regularTasks);
+const selectNumOfRemainingTasks = createSelector(
+    (state) => state.regularTasks,
+    (regularTasks) => regularTasks.filter((task) => task.completed === false).length
+  )
+
+
+const DataTracker = () => {
+    const numOfRemainingTasks = useSelector(selectNumOfRemainingTasks)
+    const numOfCompletedTasks = useSelector(state => state.completed);
 
     return (
         <div>
-                 <h6>You have {tasks.length} tasks left to do!</h6>
-                 <h6>You have completed a total of {props.completed} tasks!</h6>
+                 <h6>You have {numOfRemainingTasks} tasks left to do!</h6>
+                 <h6>You have completed a total of {numOfCompletedTasks} tasks!</h6>
         </div>
  
     )
