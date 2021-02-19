@@ -23,7 +23,8 @@ class RegularTasks extends Component {
           for (let task in completedTasks) {
             this.onDeleteHandler(completedTasks[task].id);
           };
-          this.onClearedHandler();
+          console.log("before onCleardedHandler");
+          return this.onClearedHandler();
         }
       }
     
@@ -33,27 +34,19 @@ class RegularTasks extends Component {
         this.props.onAddedRegularTask(task);
       };
     
-      // onCompleteHandler = (id) => {
-      //   this.setState({completed: this.state.completed + 1})
-      //   this.props.onCompletedRegularTask(id);
-      // }
-
       onCompleteHandler = (id) => {
-        console.log("in new onCompleteHandler");
         this.props.completeAndCountTask(id);
       }
 
       onClearedHandler = () => {
         this.props.onClearedTasks();
       }
-    
-    
+        
       onChangeInput = (event) => {
         this.setState({value: event.target.value});
       };
 
       onDeleteHandler = (id) => {
-        console.log("hello from ondelete");
         this.props.onDeleteRegularTask(id);
       };
  
@@ -95,7 +88,7 @@ const mapDispatchToProps = dispatch => {
     onAddedRegularTask: (task) => dispatch(actions.addRegularTask(task)),
     onCompletedRegularTask: (id) => dispatch(actions.completeRegularTask(id)),
     onDeleteRegularTask: (id) => dispatch(actions.deleteRegularTask(id)),
-    onClearedTasks: () => dispatch(actions.clearTasks),
+    onClearedTasks: () => dispatch(actions.clearTasks()),
     completeAndCountTask: (id) => dispatch(actions.completeAndCountTask(id))
     
   };

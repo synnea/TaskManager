@@ -45,6 +45,7 @@ const reducer = ( state = initialState, action ) => {
                 regularTasks: updatedArray
                 }
         case actionTypes.CLEAR_TASKS:
+            console.log("inside clearTasks reducer");
             return { 
                 ...state,
                 clear: !state.clear
