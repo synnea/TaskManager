@@ -9,6 +9,9 @@ const initialState = {
 
 export function nextTaskId(tasks) {
     const maxId = tasks.reduce((maxId, tasks) => Math.max(tasks.id, maxId), -1)
+    if (maxId === -1) {
+        return 1
+    } else 
     return maxId + 1
   }
 
@@ -44,6 +47,17 @@ const reducer = ( state = initialState, action ) => {
                 ...state,
                 regularTasks: updatedArray
                 }
+        case actionTypes.EDIT_REGULAR_TASK:
+            const newupdatedArray =  state.regularTasks.filter(task => task.id !== action.payload.id);
+            console.log("updated arrray" + JSON.stringify(newupdatedArray));
+
+            return {
+                ...state,
+                regularTasks: [
+                    ...newupdatedArray,
+                    action.payload
+                ]
+            }
         case actionTypes.CLEAR_TASKS:
             console.log("inside clearTasks reducer");
             return { 

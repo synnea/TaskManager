@@ -31,6 +31,13 @@ export const deleteRegularTask = ( id ) => {
     };
 };
 
+export const editRegularTask = ( task ) => {
+    return {
+        type: actionTypes.EDIT_REGULAR_TASK,
+        payload: task
+    };
+};
+
 export const clearTasks = ( ) => {
     return {
         type: actionTypes.CLEAR_TASKS,
