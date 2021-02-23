@@ -18,13 +18,27 @@ const RegularTask = (props) => {
         <div className="task-card">
 
             {props.completed
-                ? <li id={props.id} className="task completed">{props.description}</li>
-                : props.taskInEditing ? <input value={props.editedValue} onChange={props.edit} /> 
-                : <li id={props.id} className="task">{props.description}</li> }
+                ? <div> 
+                    
+                    <li id={props.id} className="task completed">{props.description}</li>
+                    <Button 
+                        endIcon={<DeleteIcon />}
+                        onClick={() => props.delete(props.id)}>
+                            Clear Task
+                      </Button> 
+                </div>
 
+                : props.taskInEditing ?
+                
+                <div>
+                    
+                    <input value={props.editedValue} onChange={props.edit} />
+                    <div><Button onClick={() => props.saveEdit(props)}>Save Edit</Button></div>
 
-            {!props.taskInEditing 
-            ? <div>   <Button
+                </div>
+                : <div>
+                    <li id={props.id} className="task">{props.description}</li>
+                    <Button
                         endIcon={<DoneIcon />} 
                         onClick={() => props.complete(props.id)}>
                             Complete Task
@@ -34,17 +48,14 @@ const RegularTask = (props) => {
                         endIcon={<DeleteIcon />}
                         onClick={() => props.delete(props.id)}>
                             Delete Task
-                      </Button> 
-                {props.completed 
-                      ? null
-                      : <Button 
+                      </Button>
+
+                     <Button
                       endIcon={<EditIcon />}
-                      onClick={() => props.editing(props.id)}>
-                      Edit Task
-                  </Button>  }   
-               </div>
-            :   <div><Button onClick={() => props.saveEdit(props)}>Save Edit</Button></div>
-            }
+                      onClick={() => props.editing(props.id)} >
+                        Edit Task         
+                    </Button>         
+                </div> }
         </div>
     )
 }
