@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 
 import RegularTasks from './components/Tasks/Tasks';
 import AppBar from './components/Layout/AppBar';
-import DataTracker from './components/DataTracker';
 
 class App extends Component {
 
@@ -20,7 +19,6 @@ class App extends Component {
             {date} / {month} / {year}
             <RegularTasks 
               data-test="component-regulartasklist"  />
-            {/* <DataTracker /> */}
           </div>
       </div>
 

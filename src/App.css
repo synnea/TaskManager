@@ -17,3 +17,9 @@ font-size: 100;
   padding-bottom: 5vh;
   background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
 }
+
+@media (min-width: 1500px) {
+  .task-panel {
+    margin: 10vh 60vh;
+  }
+}

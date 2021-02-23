@@ -1,7 +1,23 @@
 .task {
     list-style: none;
+    font-size: 1.3rem;
 }
 
 .completed {
     text-decoration: line-through;
+}
+
+.task-card {
+    background-color: cornsilk;
+    padding-top: 1vh;
+    color: #222422;
+    border-radius: 5px;
+    margin-top: 3vh;
+}
+
+
+.MuiButton-label {
+    font-size: small;
+    display: contents !important;
+
 }

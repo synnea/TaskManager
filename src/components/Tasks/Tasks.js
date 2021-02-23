@@ -43,8 +43,17 @@ class RegularTasks extends Component {
       }
         
       onChangeInput = (event) => {
+        if (event.key === 'Enter') {
+          console.log("hit enter key");
+        }
         this.setState({value: event.target.value});
       };
+
+      onKeyPressHandler = event => {
+        if (event.key === 'Enter') {
+          this.onAddHandler();
+        }
+      }
 
       onDeleteHandler = (id) => {
         this.props.onDeleteRegularTask(id);
@@ -67,7 +76,7 @@ class RegularTasks extends Component {
 
         return (
             <div className="component-tasks">
-                <Input add={this.onAddHandler} change={this.onChangeInput} value={this.state.value} /> 
+                <Input keypress={this.onKeyPressHandler} change={this.onChangeInput} value={this.state.value} /> 
                 {tasks}  
                 <DataTracker completed={this.state.completed} /> 
             </div>

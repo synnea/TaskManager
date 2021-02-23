@@ -42,7 +42,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             Task Manager
           </Typography>
-          <Button color="inherit" onClick={onClearButtonClick}><ClearAllIcon />Clear All</Button>
+          <Button color="inherit" onClick={onClearButtonClick}><ClearAllIcon />Clear Completed</Button>
         </Toolbar>
       </AppBar>
     </div>
