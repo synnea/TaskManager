@@ -55,7 +55,7 @@ class RegularTasks extends Component {
       }
 
       onEditSaveHandler = (props) => {
-        console.log("props in savehander" + JSON.stringify({...props}));
+        this.setState({editedValue: ''});
         const task = { id: props.id,
                 description: props.editedValue,
                 completed: props.completed }
