@@ -52,7 +52,7 @@ const RegularTask = (props) => {
 
                      <Button
                       endIcon={<EditIcon />}
-                      onClick={() => props.editing(props.id)} >
+                      onClick={() => props.editing(props)} >
                         Edit Task         
                     </Button>         
                 </div> }

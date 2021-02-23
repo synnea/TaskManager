@@ -40,9 +40,9 @@ class RegularTasks extends Component {
         this.props.completeAndCountTask(id);
       }
 
-      onEditModeHandler = (id) => {
-        console.log("in onEditMode" + id);
-        this.setState({taskInEditing: id});
+      onEditModeHandler = (props) => {
+        this.setState({editedValue: props.description})
+        this.setState({taskInEditing: props.id});
       }
 
       onEditChangeHandler = (event) => {
@@ -93,7 +93,6 @@ class RegularTasks extends Component {
                         complete={this.onCompleteHandler}
                         delete={this.onDeleteHandler}
                         edit={this.onEditChangeHandler}
-                        editing={this.onEditModeHandler}
                         saveEdit={this.onEditSaveHandler}
                         editedValue={this.state.editedValue}
                         taskInEditing={this.state.taskInEditing}
