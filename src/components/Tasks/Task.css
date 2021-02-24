@@ -21,3 +21,11 @@
     display: contents !important;
 
 }
+
+.MuiChip-root.personal {
+    background-color: rgb(254,107,139) !important;
+}
+
+.MuiChip-root.work {
+    background-color: rgb(255,142,83);
+}

@@ -24,9 +24,10 @@ const reducer = ( state = initialState, action ) => {
                 regularTasks: [
                     ...state.regularTasks,
                     {
-                        // auto-incrementing numeric ID for this example
+                        
                         id: nextTaskId(state.regularTasks),
-                        description: action.payload,
+                        description: action.payload.description,
+                        category: action.payload.category,
                         completed: false
                       }
                 ]

@@ -13,7 +13,8 @@ class RegularTasks extends Component {
         this.state = {
           value: '',
           editedValue: '',
-          taskInEditing: 0
+          taskInEditing: 0,
+          selectedCategory: 'unspecified category'
         };
       }
     
@@ -31,10 +32,17 @@ class RegularTasks extends Component {
       }
     
       onAddHandler = () => {
-        const task = this.state.value;
+        const task = {
+          description: this.state.value,
+          category: this.state.selectedCategory }
+
         this.setState({value: ''});
         this.props.onAddedRegularTask(task);
       };
+
+      onSelectedCategoryHandler = (event) => {
+        this.setState({selectedCategory: event.target.value});
+      }
     
       onCompleteHandler = (id) => {
         this.props.completeAndCountTask(id);
@@ -50,7 +58,6 @@ class RegularTasks extends Component {
       }
 
       onEditCloseHandler = () => {
-        console.log("in onEditClose");
         this.setState({taskInEditing: 0});
       }
 
@@ -68,9 +75,6 @@ class RegularTasks extends Component {
       }
         
       onChangeInput = (event) => {
-        if (event.key === 'Enter') {
-          console.log("hit enter key");
-        }
         this.setState({value: event.target.value});
       };
 
@@ -98,6 +102,7 @@ class RegularTasks extends Component {
                         taskInEditing={this.state.taskInEditing}
                         completed={task.completed}
                         key={task.id}
+                        category={task.category}
                         description={task.description}
                         id={task.id} />
                   } else {
@@ -105,6 +110,7 @@ class RegularTasks extends Component {
                         complete={this.onCompleteHandler}
                         delete={this.onDeleteHandler}
                         editing={this.onEditModeHandler}
+                        category={task.category}
                         completed={task.completed}
                         key={task.id}
                         description={task.description}
@@ -116,7 +122,12 @@ class RegularTasks extends Component {
 
         return (
             <div className="component-tasks">
-                <Input keypress={this.onKeyPressHandler} change={this.onChangeInput} value={this.state.value} /> 
+                <Input keypress={this.onKeyPressHandler} 
+                change={this.onChangeInput} 
+                value={this.state.value}
+                category={this.state.selectedCategory}
+                add={this.onAddHandler} 
+                selectCategory={this.onSelectedCategoryHandler} /> 
                 {tasks}  
                 <DataTracker completed={this.state.completed} /> 
             </div>
