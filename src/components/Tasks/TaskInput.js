@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
+import CategorySelect from '../CategorySelect';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RegularTaskInput = (props) => {
-    const classes = useStyles();
+        const InputLabel = "Category";
 
         return (
         <div>
@@ -34,18 +35,10 @@ const RegularTaskInput = (props) => {
 
             <Button onClick={props.add}>Add Task</Button>
 
-            <FormControl className={classes.formControl}>
-                <InputLabel id="category-select-label">Category</InputLabel>
-                <Select
-                labelId="category-select-label"
-                id="categorySelect"
-                value={props.category}
-                onChange={props.selectCategory}
-                >
-                  <MenuItem value="work">Work</MenuItem>
-                <MenuItem value="personal">Personal</MenuItem>
-                </Select>
-            </FormControl>
+            <CategorySelect 
+            category={props.category}
+            InputLabel={InputLabel}
+            selectCategory={props.selectCategory} />
         </div>   
         )
     

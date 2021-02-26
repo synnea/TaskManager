@@ -1,0 +1,9 @@
+#emptyTaskList {
+    background-color: cornsilk;
+    padding-top: 1vh;
+    color: #222422;
+    border-radius: 5px;
+    margin-top: 3vh;
+    display: flex;
+    justify-content: center;
+}

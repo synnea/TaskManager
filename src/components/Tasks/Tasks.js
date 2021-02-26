@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import Input from './TaskInput';
 import RegularTask from './Task';
 import DataTracker from '../DataTracker';
+import CategoryFilter from '../CategoryFilter';
 import * as actions from '../../store/actions';
 
 import { connect } from 'react-redux';
+import './Tasks.css';
 
 class RegularTasks extends Component {
     constructor(props) {
@@ -19,7 +21,7 @@ class RegularTasks extends Component {
       }
     
       componentDidUpdate() {
-        console.log("state" + JSON.stringify(this.state));
+        console.log("regT" + this.props.regularTasks.length);
         if (this.props.clear) {
           let completedTasks = this.props.regularTasks.filter(task => {
             return task.completed === true
@@ -30,7 +32,11 @@ class RegularTasks extends Component {
           return this.onClearedHandler();
         }
       }
-    
+
+      componentDidMount() {
+        console.log("regT" + this.props.regularTasks.length);
+      }
+
       onAddHandler = () => {
         const task = {
           description: this.state.value,
@@ -87,9 +93,14 @@ class RegularTasks extends Component {
       onDeleteHandler = (id) => {
         this.props.onDeleteRegularTask(id);
       };
+
+
  
     render () {    
-        let tasks = (
+        let tasks = <div id="emptyTaskList"><p>There are no tasks here!! Try adding some.</p></div>
+
+        if (this.props.regularTasks.length > 0) {
+          tasks =  (
             <div>
                 {this.props.regularTasks.map(task => {
                   if (task.id === this.state.taskInEditing) {
@@ -119,16 +130,21 @@ class RegularTasks extends Component {
                 })}
             </div> 
         );
-
+        }
+  
+      
         return (
+         
             <div className="component-tasks">
+
                 <Input keypress={this.onKeyPressHandler} 
-                change={this.onChangeInput} 
-                value={this.state.value}
-                category={this.state.selectedCategory}
-                add={this.onAddHandler} 
-                selectCategory={this.onSelectedCategoryHandler} /> 
-                {tasks}  
+                  change={this.onChangeInput} 
+                  value={this.state.value}
+                  category={this.state.selectedCategory}
+                  add={this.onAddHandler} 
+                  selectCategory={this.onSelectedCategoryHandler} /> 
+                {tasks}
+                <CategoryFilter />  
                 <DataTracker completed={this.state.completed} /> 
             </div>
         )
