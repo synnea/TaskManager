@@ -12,7 +12,7 @@ class App extends Component {
     let [month, date, year]    = new Date().toLocaleDateString("en-US").split("/");
 
     return (
-      <div class="app-container">
+      <div className="app-container">
           <AppBar cleared={this.onClearHandler} />
           <div className="task-panel" data-test="components-app">
             <h1>Today's Tasks</h1>

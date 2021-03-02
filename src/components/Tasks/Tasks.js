@@ -16,12 +16,12 @@ class RegularTasks extends Component {
           value: '',
           editedValue: '',
           taskInEditing: 0,
-          selectedCategory: 'unspecified category'
+          selectedCategory: 'work',
+          filteredCategory: ''
         };
       }
     
       componentDidUpdate() {
-        console.log("regT" + this.props.regularTasks.length);
         if (this.props.clear) {
           let completedTasks = this.props.regularTasks.filter(task => {
             return task.completed === true
@@ -31,10 +31,6 @@ class RegularTasks extends Component {
           };
           return this.onClearedHandler();
         }
-      }
-
-      componentDidMount() {
-        console.log("regT" + this.props.regularTasks.length);
       }
 
       onAddHandler = () => {
@@ -94,12 +90,20 @@ class RegularTasks extends Component {
         this.props.onDeleteRegularTask(id);
       };
 
+      onFilterSetHandler = (event) => {
+        this.setState({filteredCategory: event.target.value});
+      };
+
+      onFilterRemoveHandler = () => {
+        console.log("inside FilterRemoveHandler");
+        this.setState({filteredCategory: ''});
+      }
 
  
     render () {    
         let tasks = <div id="emptyTaskList"><p>There are no tasks here!! Try adding some.</p></div>
 
-        if (this.props.regularTasks.length > 0) {
+        if (this.props.regularTasks.length > 0 && !this.state.filteredCategory ) {
           tasks =  (
             <div>
                 {this.props.regularTasks.map(task => {
@@ -129,7 +133,40 @@ class RegularTasks extends Component {
                   }
                 })}
             </div> 
-        );
+          );
+        } else if (this.props.regularTasks.length > 0 && this.state.filteredCategory ) {
+          tasks =  (
+            <div>
+                {this.props.regularTasks
+                  .filter(task => task.category === this.state.filteredCategory)
+                  .map(task => {
+                    if (task.id === this.state.taskInEditing) {
+                      return  <RegularTask
+                          complete={this.onCompleteHandler}
+                          delete={this.onDeleteHandler}
+                          edit={this.onEditChangeHandler}
+                          saveEdit={this.onEditSaveHandler}
+                          editedValue={this.state.editedValue}
+                          taskInEditing={this.state.taskInEditing}
+                          completed={task.completed}
+                          key={task.id}
+                          category={task.category}
+                          description={task.description}
+                          id={task.id} />
+                    } else {
+                          return  <RegularTask
+                          complete={this.onCompleteHandler}
+                          delete={this.onDeleteHandler}
+                          editing={this.onEditModeHandler}
+                          category={task.category}
+                          completed={task.completed}
+                          key={task.id}
+                          description={task.description}
+                          id={task.id} />
+                    }
+                })}
+            </div> 
+          );
         }
   
       
@@ -138,13 +175,15 @@ class RegularTasks extends Component {
             <div className="component-tasks">
 
                 <Input keypress={this.onKeyPressHandler} 
-                  change={this.onChangeInput} 
-                  value={this.state.value}
-                  category={this.state.selectedCategory}
-                  add={this.onAddHandler} 
-                  selectCategory={this.onSelectedCategoryHandler} /> 
+                      change={this.onChangeInput} 
+                      value={this.state.value}
+                      category={this.state.selectedCategory}
+                      add={this.onAddHandler} 
+                      selectCategory={this.onSelectedCategoryHandler} /> 
                 {tasks}
-                <CategoryFilter />  
+                <CategoryFilter 
+                      filter={this.onFilterSetHandler} 
+                      removeFilter={this.onFilterRemoveHandler} />  
                 <DataTracker completed={this.state.completed} /> 
             </div>
         )
