@@ -67,6 +67,7 @@ class RegularTasks extends Component {
         this.setState({editedValue: ''});
         const task = { id: props.id,
                 description: props.editedValue,
+                category: props.category,
                 completed: props.completed }
         this.props.onEditRegularTask(task);
         this.onEditCloseHandler();
